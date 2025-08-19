@@ -860,6 +860,41 @@
             margin-left: var(--spacing-md);
         }
         
+        .menu-price-with-favorite {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .favorite-btn-in-header {
+            background: none;
+            border: none;
+            color: var(--light-border);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            padding: var(--spacing-xs);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn-in-header:hover {
+            color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn-in-header.active {
+            color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .favorite-btn-in-header.active i {
+            font-weight: 900;
+        }
+        
         .menu-description {
             color: var(--light-text);
             font-size: 0.9rem;
@@ -906,22 +941,6 @@
             align-items: center;
         }
         
-        .favorite-btn {
-            background: none;
-            border: none;
-            color: var(--light-border);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: var(--spacing-sm);
-            border-radius: 50%;
-            transition: all var(--transition-normal);
-        }
-        
-        .favorite-btn:hover,
-        .favorite-btn.active {
-            color: var(--danger-color);
-            background: rgba(231, 76, 60, 0.1);
-        }
         
         .add-to-cart-btn {
             background: var(--primary-gradient);
@@ -2801,6 +2820,512 @@
                 grid-template-columns: 1fr;
             }
             
+            /* Mobile-specific menu card design */
+            .menu-card {
+                display: flex;
+                flex-direction: row;
+                height: 120px;
+                border-radius: var(--radius-lg);
+                overflow: hidden;
+                box-shadow: var(--shadow-md);
+                border: 1px solid var(--light-border);
+                transition: all var(--transition-fast);
+            }
+            
+            .menu-card::before {
+                height: 100%;
+                width: 4px;
+                background: var(--primary-gradient);
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+            
+            .menu-card:hover {
+                transform: translateX(4px);
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .menu-card:hover::before {
+                transform: scaleY(1);
+            }
+            
+            .menu-card .menu-image {
+                width: 120px;
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                flex-shrink: 0;
+            }
+            
+            .menu-card .menu-content {
+                flex: 1;
+                padding: var(--spacing-sm);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-width: 0;
+            }
+            
+            .menu-card .menu-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: var(--spacing-xs);
+            }
+            
+            .menu-card .menu-name {
+                font-size: 1rem;
+                font-weight: 600;
+                line-height: 1.2;
+                margin: 0;
+                flex: 1;
+                margin-right: var(--spacing-sm);
+            }
+            
+            .menu-card .menu-price {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--primary-color);
+                white-space: nowrap;
+            }
+            
+            .menu-card .menu-price-with-favorite {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-xs);
+            }
+            
+            .menu-card .favorite-btn-in-header {
+                background: none;
+                border: none;
+                color: var(--light-border);
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all var(--transition-fast);
+                padding: 2px;
+                border-radius: var(--radius-sm);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 24px;
+                height: 24px;
+            }
+            
+            .menu-card .favorite-btn-in-header:hover {
+                color: var(--danger-color);
+                background: rgba(239, 68, 68, 0.1);
+                transform: scale(1.1);
+            }
+            
+            .menu-card .favorite-btn-in-header.active {
+                color: var(--danger-color);
+                background: rgba(239, 68, 68, 0.1);
+            }
+            
+            .menu-card .favorite-btn-in-header.active i {
+                font-weight: 900;
+            }
+            
+            .menu-card .menu-description {
+                font-size: 0.8rem;
+                line-height: 1.3;
+                margin: 0;
+                color: var(--light-text);
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .menu-card .menu-meta {
+                display: flex;
+                gap: var(--spacing-xs);
+                flex-wrap: wrap;
+                margin-top: var(--spacing-xs);
+            }
+            
+            .menu-card .menu-tag {
+                font-size: 0.7rem;
+                padding: 2px 6px;
+                border-radius: var(--radius-sm);
+            }
+            
+            .menu-card .menu-tag i {
+                font-size: 0.6rem;
+            }
+            
+            .menu-card .menu-badge {
+                position: absolute;
+                top: var(--spacing-xs);
+                right: var(--spacing-xs);
+                font-size: 0.65rem;
+                padding: 2px 8px;
+                border-radius: var(--radius-full);
+                z-index: 2;
+            }
+            
+            /* Mobile quick actions */
+            .menu-card .menu-actions {
+                position: absolute;
+                bottom: var(--spacing-xs);
+                right: var(--spacing-xs);
+                display: flex;
+                gap: var(--spacing-xs);
+                opacity: 1;
+                transform: translateY(0);
+                transition: all var(--transition-fast);
+            }
+            
+            .menu-card:hover .menu-actions {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .menu-card .quick-action-btn {
+                width: 32px;
+                height: 32px;
+                border-radius: var(--radius-full);
+                border: none;
+                background: var(--primary-gradient);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: var(--shadow-md);
+                transition: all var(--transition-fast);
+            }
+            
+            .menu-card .quick-action-btn:hover {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-colored);
+            }
+            
+            .menu-card .quick-action-btn.add-to-cart {
+                background: var(--primary-gradient);
+            }
+            
+            /* Hide mobile add-to-cart button when item is in cart */
+            .menu-card .quick-action-btn.add-to-cart.hide-when-in-cart {
+                display: none !important;
+            }
+            
+            /* Show mobile quantity controls when item is in cart */
+            .menu-card .mobile-quantity-controls {
+                display: none;
+                position: absolute;
+                bottom: var(--spacing-xs);
+                right: var(--spacing-xs);
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: var(--radius-xl);
+                padding: var(--spacing-xs);
+                box-shadow: var(--shadow-lg);
+                border: 1px solid var(--light-border);
+                backdrop-filter: blur(10px);
+            }
+            
+            .menu-card .mobile-quantity-controls.show {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-xs);
+            }
+            
+            .menu-card .mobile-quantity-controls .mobile-quantity-btn {
+                width: 28px;
+                height: 28px;
+                border-radius: var(--radius-full);
+                border: none;
+                background: var(--primary-gradient);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: var(--shadow-sm);
+                transition: all var(--transition-fast);
+                font-size: 0.8rem;
+            }
+            
+            .menu-card .mobile-quantity-controls .mobile-quantity-btn:hover {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-colored);
+            }
+            
+            .menu-card .mobile-quantity-controls .mobile-quantity-display {
+                min-width: 24px;
+                text-align: center;
+                font-weight: 600;
+                color: var(--secondary-color);
+                font-size: 0.9rem;
+            }
+            
+            /* Mobile card animation */
+            .menu-card {
+                animation: slideInRight 0.4s ease forwards;
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            .menu-card:nth-child(1) { animation-delay: 0.05s; }
+            .menu-card:nth-child(2) { animation-delay: 0.1s; }
+            .menu-card:nth-child(3) { animation-delay: 0.15s; }
+            .menu-card:nth-child(4) { animation-delay: 0.2s; }
+            .menu-card:nth-child(5) { animation-delay: 0.25s; }
+            .menu-card:nth-child(6) { animation-delay: 0.3s; }
+            
+            /* Hide desktop actions on mobile */
+            .menu-card .menu-item-controls {
+                display: none;
+            }
+            
+            /* Show mobile quick actions */
+            .menu-card .quick-action-btn {
+                display: flex;
+            }
+        }
+        
+        /* Desktop styles - hide mobile quick actions */
+        @media (min-width: 481px) {
+            .menu-card .quick-action-btn {
+                display: none;
+            }
+            
+            .menu-card .menu-item-controls {
+                display: block;
+            }
+            
+            /* Hide mobile quantity controls on desktop */
+            .menu-card .mobile-quantity-controls {
+                display: none !important;
+            }
+            
+            /* Restore desktop menu card layout */
+            .menu-card {
+                display: block;
+                height: auto;
+                border-radius: var(--radius-2xl);
+                overflow: hidden;
+                box-shadow: var(--shadow-md);
+                transition: all var(--transition-normal);
+                cursor: pointer;
+                border: 1px solid var(--light-hover);
+                position: relative;
+                background: white;
+            }
+            
+            .menu-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: var(--primary-gradient);
+                transform: scaleX(0);
+                transition: transform var(--transition-normal);
+                transform-origin: left;
+            }
+            
+            .menu-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: var(--shadow-xl), var(--shadow-colored);
+                border-color: var(--primary-color);
+            }
+            
+            .menu-card:hover::before {
+                transform: scaleX(1);
+            }
+            
+            .menu-card .menu-image {
+                width: 100%;
+                height: 200px;
+                aspect-ratio: auto;
+                flex-shrink: 0;
+            }
+            
+            .menu-card .menu-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .menu-card .menu-content {
+                flex: none;
+                padding: var(--spacing-lg);
+                display: block;
+                flex-direction: unset;
+                justify-content: unset;
+                min-width: unset;
+                background: white;
+            }
+            
+            .menu-card .menu-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: var(--spacing-md);
+            }
+            
+            .menu-card .menu-name {
+                font-size: 1.25rem;
+                font-weight: 700;
+                line-height: 1.3;
+                margin: 0;
+                flex: 1;
+                margin-right: var(--spacing-md);
+                color: var(--secondary-color);
+            }
+            
+            .menu-card .menu-price {
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: var(--primary-color);
+                white-space: nowrap;
+            }
+            
+            .menu-card .menu-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                margin: 0 0 var(--spacing-md) 0;
+                color: var(--light-text);
+                display: block;
+                -webkit-line-clamp: unset;
+                overflow: visible;
+            }
+            
+            .menu-card .menu-meta {
+                display: flex;
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+                margin-bottom: var(--spacing-md);
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .menu-card .menu-meta-left {
+                display: flex;
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+                flex: 1;
+            }
+            
+            .menu-card .menu-meta-right {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-sm);
+                margin-left: auto;
+            }
+            
+            .menu-card .menu-item-controls {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-sm);
+                margin: 0;
+                padding: 0;
+                border: none;
+                background: none;
+            }
+            
+            /* Desktop Add to Cart Button - Mobile Style */
+            .menu-card .add-to-cart-btn {
+                width: 32px;
+                height: 32px;
+                border-radius: var(--radius-full);
+                border: none;
+                background: var(--primary-gradient);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: var(--shadow-md);
+                transition: all var(--transition-fast);
+                flex: none;
+                padding: 0;
+                font-size: 0.9rem;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .menu-card .add-to-cart-btn:hover {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-colored);
+            }
+            
+            .menu-card .add-to-cart-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .menu-card .add-to-cart-btn span {
+                display: none;
+            }
+            
+            .menu-card .add-to-cart-btn i {
+                font-size: 0.9rem;
+                margin: 0;
+            }
+            
+            /* Desktop Quantity Selector - Mobile Style */
+            .menu-card .quantity-selector {
+                display: none;
+                align-items: center;
+                gap: var(--spacing-xs);
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: var(--radius-xl);
+                padding: var(--spacing-xs);
+                box-shadow: var(--shadow-lg);
+                border: 1px solid var(--light-border);
+                backdrop-filter: blur(10px);
+                flex: none;
+            }
+            
+            .menu-card .quantity-selector.active {
+                display: flex;
+            }
+            
+            .menu-card .quantity-btn {
+                width: 28px;
+                height: 28px;
+                border-radius: var(--radius-full);
+                border: none;
+                background: var(--primary-gradient);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: var(--shadow-sm);
+                transition: all var(--transition-fast);
+                font-size: 0.8rem;
+            }
+            
+            .menu-card .quantity-btn:hover {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-colored);
+            }
+            
+            .menu-card .quantity-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .menu-card .quantity-display {
+                min-width: 24px;
+                text-align: center;
+                font-weight: 600;
+                color: var(--secondary-color);
+                font-size: 0.9rem;
+                background: transparent;
+                padding: 0;
+            }
+            
             .cart-sidebar {
                 max-width: 100%;
                 border-left: none;
@@ -3844,13 +4369,16 @@
                     
                     const vatAmount = subtotalAmount * 0.05;
                     const serviceChargeAmount = subtotalAmount * 0.10;
-                    const totalAmount = subtotalAmount + vatAmount + serviceChargeAmount;
+                    const totalAmount = subtotalAmount + vatAmount + vatAmount + serviceChargeAmount;
                     
                     cartCount.textContent = itemCount;
                     subtotal.textContent = Utils.formatCurrency(subtotalAmount);
                     vat.textContent = Utils.formatCurrency(vatAmount);
                     serviceCharge.textContent = Utils.formatCurrency(serviceChargeAmount);
                     total.textContent = Utils.formatCurrency(totalAmount);
+                    
+                    // Update menu items cart state
+                    MenuService.updateAllItemsCartState();
                 } catch (error) {
                     console.error('Error in updateCartDisplay:', error);
                 }
@@ -3881,50 +4409,61 @@
                     <div class="menu-content">
                         <div class="menu-header">
                             <h3 class="menu-name">${item.name_bn || item.name}</h3>
-                            <div class="menu-price">${Utils.formatCurrency(item.price)}</div>
+                            <div class="menu-price-with-favorite">
+                                <button class="favorite-btn-in-header ${isFavorite ? 'active' : ''}" onclick="FavoriteService.toggle(${item.id})" title="পছন্দের তালিকায় যোগ করুন">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <div class="menu-price">${Utils.formatCurrency(item.price)}</div>
+                            </div>
                         </div>
                         <p class="menu-description">${item.description_bn || item.description || ''}</p>
                         <div class="menu-meta">
-                            ${item.is_vegetarian ? 
-                                `<span class="menu-tag vegetarian">
-                                    <i class="fas fa-leaf"></i>
-                                    সবজি
-                                </span>` : ''
-                            }
-                            ${item.is_spicy && item.is_spicy !== 'none' ? 
-                                `<span class="menu-tag spicy">
-                                    <i class="fas fa-pepper-hot"></i>
-                                    ${item.is_spicy === 'mild' ? 'মৃদু ঝাল' : 
-                                      item.is_spicy === 'medium' ? 'মাঝারি ঝাল' : 
-                                      item.is_spicy === 'hot' ? 'ঝাল' : 'ঝাল'}
-                                </span>` : ''
-                            }
-                            ${item.preparation_time ? 
-                                `<span class="menu-tag">
-                                    <i class="fas fa-clock"></i>
-                                    ${item.preparation_time}মিনিট
-                                </span>` : ''
-                            }
-                        </div>
-                        <div class="menu-actions">
-                            <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="FavoriteService.toggle(${item.id})" title="পছন্দের তালিকায় যোগ করুন">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="menu-item-controls" data-item-id="${item.id}">
-                                <button class="add-to-cart-btn" onclick="MenuService.showCustomization(${item.id})" ${!item.is_available ? 'disabled' : ''}>
-                                    <i class="fas fa-plus"></i>
-                                    <span>${!item.is_available ? 'অনুপলব্ধ' : 'কার্টে যোগ করুন'}</span>
-                                </button>
-                                <div class="quantity-selector">
-                                    <button class="quantity-btn" onclick="MenuService.decreaseQuantity(${item.id})" title="কমান">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <div class="quantity-display" id="quantity-${item.id}">1</div>
-                                    <button class="quantity-btn" onclick="MenuService.increaseQuantity(${item.id})" title="বাড়ান">
+                            <div class="menu-meta-left">
+                                ${item.is_vegetarian ? 
+                                    `<span class="menu-tag vegetarian">
+                                        <i class="fas fa-leaf"></i>
+                                        সবজি
+                                    </span>` : ''
+                                }
+                                ${item.is_spicy && item.is_spicy !== 'none' ? 
+                                    `<span class="menu-tag spicy">
+                                        <i class="fas fa-pepper-hot"></i>
+                                        ${item.is_spicy === 'mild' ? 'মৃদু ঝাল' : 
+                                          item.is_spicy === 'medium' ? 'মাঝারি ঝাল' : 
+                                          item.is_spicy === 'hot' ? 'ঝাল' : 'ঝাল'}
+                                    </span>` : ''
+                                }
+                                ${item.preparation_time ? 
+                                    `<span class="menu-tag">
+                                        <i class="fas fa-clock"></i>
+                                        ${item.preparation_time}মিনিট
+                                    </span>` : ''
+                                }
+                            </div>
+                            <div class="menu-meta-right">
+                                <!-- Desktop actions -->
+                                <div class="menu-item-controls" data-item-id="${item.id}">
+                                    <button class="add-to-cart-btn" onclick="MenuService.showCustomization(${item.id})" ${!item.is_available ? 'disabled' : ''}>
                                         <i class="fas fa-plus"></i>
+                                        <span>${!item.is_available ? 'অনুপলব্ধ' : 'কার্টে যোগ করুন'}</span>
                                     </button>
+                                    <div class="quantity-selector">
+                                        <button class="quantity-btn" onclick="MenuService.decreaseQuantity(${item.id})" title="কমান">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="quantity-display" id="quantity-${item.id}">1</span>
+                                        <button class="quantity-btn" onclick="MenuService.increaseQuantity(${item.id})" title="বাড়ান">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="menu-actions">
+                            <!-- Mobile quick actions -->
+                            <button class="quick-action-btn add-to-cart" onclick="MenuService.showCustomization(${item.id})" ${!item.is_available ? 'disabled' : ''} title="কার্টে যোগ করুন">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -4002,6 +4541,11 @@
                     section.appendChild(grid);
                     container.appendChild(section);
                 });
+                
+                // Update cart state for all menu items after rendering
+                setTimeout(() => {
+                    this.updateAllItemsCartState();
+                }, 100);
             },
             
             /**
@@ -4407,24 +4951,36 @@
                     const item = AppState.menuItems.find(i => i.id === itemId);
                     if (!item) return;
                     
-                    // Show quantity selector and hide add to cart button
-                    const controls = document.querySelector(`[data-item-id="${itemId}"]`);
-                    if (!controls) return;
-                    
-                    const addToCartBtn = controls.querySelector('.add-to-cart-btn');
-                    const quantitySelector = controls.querySelector('.quantity-selector');
-                    
-                    if (addToCartBtn) addToCartBtn.style.display = 'none';
-                    if (quantitySelector) quantitySelector.classList.add('active');
+                    // Check if item is already in cart
+                    const existingCartItem = AppState.cart.find(cartItem => cartItem.menuItemId === itemId);
+                    const currentQuantity = existingCartItem ? existingCartItem.quantity : 1;
                     
                     // Initialize quantity for this item
                     if (!AppState.itemQuantities) {
                         AppState.itemQuantities = {};
                     }
-                    AppState.itemQuantities[itemId] = AppState.itemQuantities[itemId] || 1;
+                    AppState.itemQuantities[itemId] = currentQuantity;
                     
-                    // Add to cart with current quantity
-                    CartService.addToCartWithQuantity(item, AppState.itemQuantities[itemId]);
+                    // Update quantity display
+                    const quantityDisplay = document.getElementById(`quantity-${itemId}`);
+                    if (quantityDisplay) {
+                        quantityDisplay.textContent = currentQuantity;
+                    }
+                    
+                    // Show quantity selector and hide add to cart button
+                    const controls = document.querySelector(`[data-item-id="${itemId}"]`);
+                    if (controls) {
+                        const addToCartBtn = controls.querySelector('.add-to-cart-btn');
+                        const quantitySelector = controls.querySelector('.quantity-selector');
+                        
+                        if (addToCartBtn) addToCartBtn.style.display = 'none';
+                        if (quantitySelector) quantitySelector.classList.add('active');
+                    }
+                    
+                    // Add to cart if not already there
+                    if (!existingCartItem) {
+                        CartService.addToCartWithQuantity(item, currentQuantity);
+                    }
                 } catch (error) {
                     console.error('Error in showCustomization:', error);
                 }
@@ -4439,17 +4995,27 @@
                     if (!AppState.itemQuantities) {
                         AppState.itemQuantities = {};
                     }
-                    AppState.itemQuantities[itemId] = (AppState.itemQuantities[itemId] || 1) + 1;
                     
+                    const currentQuantity = AppState.itemQuantities[itemId] || 1;
+                    const newQuantity = currentQuantity + 1;
+                    AppState.itemQuantities[itemId] = newQuantity;
+                    
+                    // Update quantity display
                     const quantityDisplay = document.getElementById(`quantity-${itemId}`);
                     if (quantityDisplay) {
-                        quantityDisplay.textContent = AppState.itemQuantities[itemId];
+                        quantityDisplay.textContent = newQuantity;
+                    }
+                    
+                    // Update mobile quantity display
+                    const mobileQuantityDisplay = document.querySelector(`.mobile-quantity-controls[data-item-id="${itemId}"] .mobile-quantity-display`);
+                    if (mobileQuantityDisplay) {
+                        mobileQuantityDisplay.textContent = newQuantity;
                     }
                     
                     // Update cart
                     const item = AppState.menuItems.find(i => i.id === itemId);
                     if (item) {
-                        CartService.updateItemQuantity(itemId, AppState.itemQuantities[itemId]);
+                        CartService.addToCartWithQuantity(item, newQuantity);
                     }
                 } catch (error) {
                     console.error('Error in increaseQuantity:', error);
@@ -4468,17 +5034,25 @@
                     
                     const currentQuantity = AppState.itemQuantities[itemId] || 1;
                     if (currentQuantity > 1) {
-                        AppState.itemQuantities[itemId] = currentQuantity - 1;
+                        const newQuantity = currentQuantity - 1;
+                        AppState.itemQuantities[itemId] = newQuantity;
                         
+                        // Update quantity display
                         const quantityDisplay = document.getElementById(`quantity-${itemId}`);
                         if (quantityDisplay) {
-                            quantityDisplay.textContent = AppState.itemQuantities[itemId];
+                            quantityDisplay.textContent = newQuantity;
+                        }
+                        
+                        // Update mobile quantity display
+                        const mobileQuantityDisplay = document.querySelector(`.mobile-quantity-controls[data-item-id="${itemId}"] .mobile-quantity-display`);
+                        if (mobileQuantityDisplay) {
+                            mobileQuantityDisplay.textContent = newQuantity;
                         }
                         
                         // Update cart
                         const item = AppState.menuItems.find(i => i.id === itemId);
                         if (item) {
-                            CartService.updateItemQuantity(itemId, AppState.itemQuantities[itemId]);
+                            CartService.addToCartWithQuantity(item, newQuantity);
                         }
                     } else {
                         // If quantity is 1, remove from cart and show add to cart button again
@@ -4528,11 +5102,172 @@
                 });
                 
                 document.getElementById('customizedPrice').textContent = Utils.formatCurrency(Math.round(totalPrice));
+            },
+
+            /**
+             * Check if item is in cart and update UI accordingly
+             * @param {number} itemId - Item ID
+             */
+            updateItemCartState(itemId) {
+                try {
+                    const cartItem = AppState.cart.find(item => item.menuItemId === itemId);
+                    const controls = document.querySelector(`[data-item-id="${itemId}"]`);
+                    
+                    if (!controls) return;
+                    
+                    const addToCartBtn = controls.querySelector('.add-to-cart-btn');
+                    const quantitySelector = controls.querySelector('.quantity-selector');
+                    const quantityDisplay = document.getElementById(`quantity-${itemId}`);
+                    
+                    // Mobile elements
+                    const mobileAddToCartBtn = document.querySelector(`.quick-action-btn.add-to-cart[onclick="MenuService.showCustomization(${itemId})"]`);
+                    const mobileQuantityControls = document.querySelector(`.mobile-quantity-controls[data-item-id="${itemId}"]`);
+                    
+                    if (cartItem && cartItem.quantity > 0) {
+                        // Item is in cart, show quantity selector
+                        if (addToCartBtn) addToCartBtn.style.display = 'none';
+                        if (quantitySelector) quantitySelector.classList.add('active');
+                        if (quantityDisplay) quantityDisplay.textContent = cartItem.quantity;
+                        
+                        // Hide mobile add-to-cart button
+                        if (mobileAddToCartBtn) {
+                            mobileAddToCartBtn.classList.add('hide-when-in-cart');
+                        }
+                        
+                        // Show mobile quantity controls
+                        this.updateMobileQuantityControls(itemId, cartItem.quantity);
+                        
+                        // Update quantity state
+                        if (!AppState.itemQuantities) {
+                            AppState.itemQuantities = {};
+                        }
+                        AppState.itemQuantities[itemId] = cartItem.quantity;
+                    } else {
+                        // Item is not in cart, show add to cart button
+                        if (addToCartBtn) addToCartBtn.style.display = 'flex';
+                        if (quantitySelector) quantitySelector.classList.remove('active');
+                        if (quantityDisplay) quantityDisplay.textContent = '1';
+                        
+                        // Show mobile add-to-cart button
+                        if (mobileAddToCartBtn) {
+                            mobileAddToCartBtn.classList.remove('hide-when-in-cart');
+                        }
+                        
+                        // Hide mobile quantity controls
+                        if (mobileQuantityControls) {
+                            mobileQuantityControls.classList.remove('show');
+                        }
+                        
+                        // Update quantity state
+                        if (!AppState.itemQuantities) {
+                            AppState.itemQuantities = {};
+                        }
+                        AppState.itemQuantities[itemId] = 1;
+                    }
+                } catch (error) {
+                    console.error('Error in updateItemCartState:', error);
+                }
+            },
+
+            /**
+             * Update mobile quantity controls
+             * @param {number} itemId - Item ID
+             * @param {number} quantity - Current quantity
+             */
+            updateMobileQuantityControls(itemId, quantity) {
+                try {
+                    // Don't create mobile controls on desktop
+                    if (window.innerWidth >= 481) {
+                        return;
+                    }
+                    
+                    let mobileControls = document.querySelector(`.mobile-quantity-controls[data-item-id="${itemId}"]`);
+                    
+                    if (!mobileControls) {
+                        // Create mobile quantity controls if they don't exist
+                        const menuCard = document.querySelector(`[data-item-id="${itemId}"]`).closest('.menu-card');
+                        if (menuCard) {
+                            mobileControls = document.createElement('div');
+                            mobileControls.className = 'mobile-quantity-controls';
+                            mobileControls.setAttribute('data-item-id', itemId);
+                            mobileControls.innerHTML = `
+                                <button class="mobile-quantity-btn" onclick="MenuService.decreaseQuantity(${itemId})" title="কমান">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="mobile-quantity-display">${quantity}</span>
+                                <button class="mobile-quantity-btn" onclick="MenuService.increaseQuantity(${itemId})" title="বাড়ান">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            `;
+                            menuCard.appendChild(mobileControls);
+                        }
+                    }
+                    
+                    // Update quantity display
+                    const quantityDisplay = mobileControls.querySelector('.mobile-quantity-display');
+                    if (quantityDisplay) {
+                        quantityDisplay.textContent = quantity;
+                    }
+                    
+                    // Show controls
+                    mobileControls.classList.add('show');
+                } catch (error) {
+                    console.error('Error in updateMobileQuantityControls:', error);
+                }
+            },
+
+            /**
+             * Update all menu items cart state
+             */
+            updateAllItemsCartState() {
+                try {
+                    AppState.menuItems.forEach(item => {
+                        this.updateItemCartState(item.id);
+                    });
+                } catch (error) {
+                    console.error('Error in updateAllItemsCartState:', error);
+                }
             }
         };
         
         // Cart Service
         const CartService = {
+            /**
+             * Save cart data to local storage
+             */
+            saveCartToStorage() {
+                try {
+                    localStorage.setItem(`cart_${AppState.branchId}`, JSON.stringify(AppState.cart));
+                } catch (error) {
+                    console.error('Error saving cart to local storage:', error);
+                }
+            },
+            
+            /**
+             * Load cart data from local storage
+             */
+            loadCartFromStorage() {
+                try {
+                    const savedCart = localStorage.getItem(`cart_${AppState.branchId}`);
+                    AppState.cart = savedCart ? Utils.safeJsonParse(savedCart, []) : [];
+                    UIService.updateCartDisplay();
+                } catch (error) {
+                    console.error('Error loading cart from local storage:', error);
+                    AppState.cart = [];
+                }
+            },
+            
+            /**
+             * Clear cart data from local storage
+             */
+            clearCartFromStorage() {
+                try {
+                    localStorage.removeItem(`cart_${AppState.branchId}`);
+                } catch (error) {
+                    console.error('Error clearing cart from local storage:', error);
+                }
+            },
+            
             /**
              * Add item to cart from favorites
              * @param {number} itemId - Item ID
@@ -4563,6 +5298,7 @@
                 };
                 
                 AppState.cart.push(cartItem);
+                this.saveCartToStorage();
                 UIService.updateCartDisplay();
             },
 
@@ -4593,6 +5329,7 @@
                         AppState.cart.push(cartItem);
                     }
                     
+                    this.saveCartToStorage();
                     UIService.updateCartDisplay();
                 } catch (error) {
                     console.error('Error in addToCartWithQuantity:', error);
@@ -4609,6 +5346,7 @@
                     const item = AppState.cart.find(i => i.menuItemId === itemId);
                     if (item) {
                         item.quantity = quantity;
+                        this.saveCartToStorage();
                         UIService.updateCartDisplay();
                     }
                 } catch (error) {
@@ -4623,6 +5361,7 @@
             removeFromCart(itemId) {
                 try {
                     AppState.cart = AppState.cart.filter(i => i.menuItemId !== itemId);
+                    this.saveCartToStorage();
                     UIService.updateCartDisplay();
                 } catch (error) {
                     console.error('Error in removeFromCart:', error);
@@ -4668,6 +5407,7 @@
                 };
                 
                 AppState.cart.push(cartItem);
+                this.saveCartToStorage();
                 UIService.updateCartDisplay();
                 UIService.hideModal('customizationModal');
                 UIService.showToast('কার্টে যোগ করা হয়েছে');
@@ -4689,6 +5429,7 @@
                         AppState.cart = AppState.cart.filter(i => i.id !== itemId);
                     }
                     
+                    this.saveCartToStorage();
                     UIService.updateCartDisplay();
                 } catch (error) {
                     console.error('Error in updateQuantity:', error);
@@ -4724,8 +5465,46 @@
                 }
                 
                 localStorage.setItem(`favorites_${AppState.branchId}`, JSON.stringify(favorites));
-                UIService.renderMenuItems();
+                
+                // Update AppState favorites
+                AppState.favorites = favorites;
+                
+                // Update only the favorite buttons for this specific item
+                this.updateFavoriteButtons(itemId, index === -1);
+                
+                // Update favorites dropdown
                 UIService.loadFavorites();
+            },
+            
+            /**
+             * Update favorite button for a specific item
+             * @param {number} itemId - Menu item ID
+             * @param {boolean} isActive - Whether the item is now a favorite
+             */
+            updateFavoriteButtons(itemId, isActive) {
+                try {
+                    // Update only the favorite button in the header for this item
+                    const selector = `.favorite-btn-in-header[onclick="FavoriteService.toggle(${itemId})"]`;
+                    
+                    const buttons = document.querySelectorAll(selector);
+                    buttons.forEach(button => {
+                        if (isActive) {
+                            button.classList.add('active');
+                            const icon = button.querySelector('i');
+                            if (icon) {
+                                icon.style.fontWeight = '900';
+                            }
+                        } else {
+                            button.classList.remove('active');
+                            const icon = button.querySelector('i');
+                            if (icon) {
+                                icon.style.fontWeight = '400';
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error updating favorite buttons:', error);
+                }
             },
             
             /**
@@ -4740,8 +5519,14 @@
                 if (index > -1) {
                     favorites.splice(index, 1);
                     localStorage.setItem(`favorites_${AppState.branchId}`, JSON.stringify(favorites));
+                    
+                    // Update AppState favorites
+                    AppState.favorites = favorites;
+                    
+                    // Update only the favorite buttons for this item
+                    this.updateFavoriteButtons(itemId, false);
+                    
                     UIService.loadFavorites();
-                    UIService.renderMenuItems();
                     UIService.showToast('পছন্দ থেকে সরানো হয়েছে');
                 }
             }
@@ -4923,6 +5708,7 @@
                     
                     // Clear cart and reset form
                     AppState.cart = [];
+                    CartService.clearCartFromStorage();
                     UIService.updateCartDisplay();
                     UIService.hideModal('orderModal');
                     UIService.toggleCart();
@@ -5714,6 +6500,14 @@
                     } catch (error) {
                         console.error('Error loading menu items:', error);
                         // Continue without menu items
+                    }
+                    
+                    // Load cart from local storage
+                    try {
+                        CartService.loadCartFromStorage();
+                    } catch (error) {
+                        console.error('Error loading cart from storage:', error);
+                        // Continue with empty cart
                     }
                     
                     try {
