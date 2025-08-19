@@ -579,6 +579,51 @@
             align-items: center;
             gap: var(--spacing-sm);
         }
+        /* New styles for compact desktop search and filter */
+.filter-controls-desktop {
+    display: none; /* Hide on mobile by default */
+}
+.search-filter-container {
+    display: flex;
+    flex-direction: column;
+}
+.filter-controls-mobile {
+    display: block; /* Show on mobile by default */
+}
+
+/* Desktop layout adjustments */
+@media (min-width: 992px) {
+    .search-filter-section {
+        padding: var(--spacing-sm) 0; /* Reduced padding on desktop */
+    }
+
+    .search-filter-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .search-container {
+        flex-grow: 1; /* Allows search bar to take available space */
+        margin-bottom: 0;
+    }
+    
+    .filter-controls-desktop {
+        display: flex; /* Show and align horizontally on desktop */
+        gap: var(--spacing-sm);
+        align-items: center;
+    }
+
+    .sort-container {
+        margin-bottom: 0;
+    }
+
+    .filter-controls-mobile {
+        display: none; /* Hide the mobile filter section on desktop */
+    }
+}
+
         
         /* Category Navigation */
         .category-nav {
@@ -589,7 +634,10 @@
             scrollbar-width: thin;
             scrollbar-color: var(--primary-color) var(--light-hover);
         }
-        
+        /* Category Tabs Spacing */
+.category-tabs {
+    padding-top: var(--spacing-md); /* Adds 1rem of space above the category tabs */
+}
         .category-nav::-webkit-scrollbar {
             height: 6px;
         }
@@ -745,12 +793,13 @@
         }
         
         .menu-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(135deg, var(--light-hover), var(--light-border));
-            position: relative;
-        }
+    width: 100%;
+    aspect-ratio: 1 / 1; /* This makes the element a square */
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--light-hover), var(--light-border));
+    position: relative;
+    overflow: hidden; /* Ensures the image stays within the square bounds */
+}
         
         .menu-image::before {
             content: '';
@@ -786,7 +835,7 @@
         }
         
         .menu-content {
-            padding: var(--spacing-lg);
+            padding: var(--spacing-md);
         }
         
         .menu-header {
@@ -814,14 +863,14 @@
         .menu-description {
             color: var(--light-text);
             font-size: 0.9rem;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
             line-height: 1.5;
         }
         
         .menu-meta {
             display: flex;
             gap: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
             flex-wrap: wrap;
         }
         
@@ -2939,14 +2988,40 @@
     </header>
     
     <!-- Search and Filter Section -->
-    <div class="search-filter-section">
-        <div class="container">
+<div class="search-filter-section">
+    <div class="container">
+        <div class="search-filter-container">
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" id="searchInput" placeholder="খাবার খুঁজুন...">
             </div>
             
-            <!-- Filter Sections -->
+            <div class="filter-controls-desktop">
+                <button class="filter-btn" data-filter="vegetarian">
+                    <i class="fas fa-leaf"></i>
+                    সবজি
+                </button>
+                <button class="filter-btn" data-filter="spicy">
+                    <i class="fas fa-pepper-hot"></i>
+                    ঝাল
+                </button>
+                <button class="filter-btn" data-filter="popular">
+                    <i class="fas fa-star"></i>
+                    জনপ্রিয়
+                </button>
+            </div>
+
+            <div class="sort-container">
+                <select class="sort-select" id="sortSelect">
+                    <option value="name">নাম অনুযায়ী</option>
+                    <option value="price-low">কম দাম অনুযায়ী</option>
+                    <option value="price-high">বেশি দাম অনুযায়ী</option>
+                    <option value="popular">জনপ্রিয়তা অনুযায়ী</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-controls-mobile">
             <div class="filter-section">
                 <div class="filter-section-title">
                     <i class="fas fa-filter"></i>
@@ -2961,40 +3036,15 @@
                         <i class="fas fa-arrow-up"></i>
                         বেশি দাম
                     </button>
-                    <button class="filter-btn" data-filter="vegetarian">
-                        <i class="fas fa-leaf"></i>
-                        সবজি
-                    </button>
-                    <button class="filter-btn" data-filter="spicy">
-                        <i class="fas fa-pepper-hot"></i>
-                        ঝাল
-                    </button>
-                    <button class="filter-btn" data-filter="popular">
-                        <i class="fas fa-star"></i>
-                        জনপ্রিয়
-                    </button>
                     <button class="filter-btn" data-filter="available">
                         <i class="fas fa-check-circle"></i>
                         পাওয়া যাচ্ছে
                     </button>
                 </div>
             </div>
-            
-            <!-- Sort Section -->
-            <div class="filter-section">
-                <div class="filter-section-title">
-                    <i class="fas fa-sort"></i>
-                    <span>সাজান</span>
-                </div>
-                <select class="sort-select" id="sortSelect">
-                    <option value="name">নাম অনুযায়ী</option>
-                    <option value="price-low">কম দাম অনুযায়ী</option>
-                    <option value="price-high">বেশি দাম অনুযায়ী</option>
-                    <option value="popular">জনপ্রিয়তা অনুযায়ী</option>
-                </select>
-            </div>
         </div>
     </div>
+</div>
     
     <!-- Category Tabs -->
     <div class="category-tabs">
